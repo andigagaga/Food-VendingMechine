@@ -1,9 +1,10 @@
 import VendingMechinePage from "./pages/VendingMechinePage";
+import Router from "./routes/Router";
 
 export default function App() {
   return (
     <div>
-      <VendingMechinePage/>
+      <Router/>
     </div>
   );
 }

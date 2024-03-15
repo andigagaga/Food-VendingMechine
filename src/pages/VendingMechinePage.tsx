@@ -8,16 +8,18 @@ import Rupiah from "../assets/rupiah.json";
 import successLottie from "../assets/success.json";
 import vendingMechineLottie from "../assets/vendingMechine.json";
 import Button from "../components/Button";
-import ProductCard from "../components/ProductCard";
-import getProducts from "../services/api";
 import { TFoods } from "../type";
+import { ProductCard } from "../components";
+import getProducts from "../services/api";
+import ButtonBack from "../assets/button-back.json";
+import { Link } from "react-router-dom";
 
-function Contoh() {
+function VendingMechinePage() {
   const [data, setData] = useState<TFoods[]>([]);
   const [purchasedItems, setPurchasedItems] = useState<TFoods[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [money, setMoney] = useState(0);
-  const [isActive, setIsActive] = useState(true);
+  const [, setIsActive] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [changeAmount, setChangeAmount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -152,14 +154,21 @@ function Contoh() {
       {isLoading && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
           <div>
-            <div className="font-bold text-red-600"><Lottie animationData={loadingLottie}/></div>
+            <div className="font-bold text-red-600">
+              <Lottie animationData={loadingLottie} />
+            </div>
           </div>
         </div>
       )}
-
       <div className="flex">
         <div className="container bg-transparent">
-          <div className="flex">
+          <div className="flex gap-8">
+            <Link to={"/"}>
+              <div className="flex justify-center items-center">
+                <Lottie animationData={ButtonBack} className=" h-10" />
+                <span className="text-black font-bold">Back</span>
+              </div>
+            </Link>
             <div>
               <h1 className="text-black font-bold">Vending Machine</h1>
               <div className="balance text-black">
@@ -260,4 +269,4 @@ function Contoh() {
   );
 }
 
-export default Contoh;
+export default VendingMechinePage;

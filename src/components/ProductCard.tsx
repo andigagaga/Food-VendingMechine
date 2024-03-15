@@ -23,7 +23,6 @@ export default function ProductCard({
   product,
   onPurchase,
   onDecreaseQuantity,
-  disable,
 }: ProductCardProps) {
   const [isAddClicked, setIsAddClicked] = useState(false);
   const handlePurchase = () => {
