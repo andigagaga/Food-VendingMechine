@@ -1,22 +1,15 @@
-import Lottie from "lottie-react";
 import { useState } from "react";
 import "../App.css";
+import { TFoods } from "../type";
+
 import addButton from "../assets/add-icon.json";
 import minButton from "../assets/min-icon.json";
-
-interface TProduct {
-  id: number;
-  name: string;
-  price: number;
-  stock: number;
-  image: string;
-}
+import Lottie from "lottie-react";
 
 interface ProductCardProps {
-  product: TProduct;
+  product: TFoods;
   onPurchase: (productId: number) => void;
   onDecreaseQuantity: (productId: number) => void;
-  disable: boolean;
 }
 
 export default function ProductCard({
@@ -24,13 +17,11 @@ export default function ProductCard({
   onPurchase,
   onDecreaseQuantity,
 }: ProductCardProps) {
-  const [isAddClicked, setIsAddClicked] = useState(false);
   const handlePurchase = () => {
     if (product.stock > 0) {
-      setIsAddClicked(true);
       onPurchase(product.id);
     } else {
-      alert("Stok Produk Habis");
+      console.log("product habis");
     }
   };
 
@@ -39,46 +30,32 @@ export default function ProductCard({
   };
 
   return (
-    <div className="product container bg-transparent">
-      {product.stock > 0 ? (
-        <div
-        key={product.id}
-        className="flex gap-4 items-center justify-between"
-      >
-        <div className="name text-green-800 flex items-center gap-10">
-          <div>
-
-          <img
-            src={product.image}
-            alt=""
-            className="w-10 h-10 rounded-full mr-2"
-          />{" "}
-          <span className="text-base sm:text-lg">{product.name}</span>
-          </div>
-        <div className="price name text-orange-700">
-          Harga : Rp{" "}
-          <span className="text-base sm:text-lg">{product.price}</span>
-        </div>
-        </div>
-        <div>
-          {isAddClicked && (
-            <button onClick={handleDecreaseQuantity} className="buy-button">
-              <p className="w-8">
-                <Lottie animationData={minButton} />
-              </p>
-            </button>
-          )}
-          <button onClick={handlePurchase} className="buy-button">
-            <p className="w-8">
-              <Lottie animationData={addButton} />
+    <div className="flex flex-col gap-3">
+      <div className="text-black flex gap-7 items-center">
+        {product.stock > 0 ? (
+          <>
+            <img src={product.image} alt="" className="w-8 h-8" />
+            <p className="text-black font-bold text-xs">{product.name}</p>
+            <p className="bg-blue-900 p-1 w-28 flex justify-center rounded-full text-white text-xs">
+              Rp {product.price}
             </p>
-          </button>
-        </div>
+            <button
+              className="stext-white rounded-full w-8"
+              onClick={handleDecreaseQuantity}
+            >
+              <Lottie animationData={minButton}/>
+            </button>
+            <button
+              className="bg-green-800 text-white rounded-full w-8"
+              onClick={handlePurchase}
+            >
+              <Lottie animationData={addButton}/>
+            </button>
+          </>
+        ) : (
+          <p className="text-red-700">Stock Habis</p>
+        )}
       </div>
-      
-      ) : (
-        <div className="text-red-700 font-semibold">PRODUCT HABIS !</div>
-      )}
     </div>
   );
 }
