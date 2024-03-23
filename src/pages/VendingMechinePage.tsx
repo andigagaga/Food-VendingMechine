@@ -17,7 +17,7 @@ export default function VendingMechinePage() {
   const [purchasedItems, setPurchasedItems] = useState<TFoods[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [money, setMoney] = useState(0);
-  const [setIsActive] = useState(true);
+  const [isActive,setIsActive] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [changeAmount, setChangeAmount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -51,6 +51,15 @@ export default function VendingMechinePage() {
           const newItem = { ...productToPurchase, quantity: 1 };
           setPurchasedItems([...purchasedItems, newItem]);
         }
+
+        const totalPriceAfterPurchase = totalPrice + productToPurchase.price;
+        if(totalPriceAfterPurchase <= money) {
+          setTotalPrice(totalPriceAfterPurchase)
+        } else {
+          setIsActive(true)
+          alert("Saldo tidak mencukupi untuk membeli barang ini")
+        }
+
       }
     } else {
       alert("Anda belum mengisi saldo");
@@ -170,6 +179,8 @@ export default function VendingMechinePage() {
               product={product}
               onPurchase={handlePurchase}
               onDecreaseQuantity={handleDecreaseQuantity}
+              disabled={isActive}
+              
             />
           ))}
         </div>

@@ -10,12 +10,14 @@ interface ProductCardProps {
   product: TFoods;
   onPurchase: (productId: number) => void;
   onDecreaseQuantity: (productId: number) => void;
+  disabled: boolean;
 }
 
 export default function ProductCard({
   product,
   onPurchase,
   onDecreaseQuantity,
+  disabled,
 }: ProductCardProps) {
   const handlePurchase = () => {
     if (product.stock > 0) {
@@ -48,6 +50,7 @@ export default function ProductCard({
             <button
               className="bg-green-800 text-white rounded-full w-8"
               onClick={handlePurchase}
+              disabled={disabled}
             >
               <Lottie animationData={addButton}/>
             </button>
