@@ -1,8 +1,7 @@
-
 export default function Button({ onClick, value, disabled }: any) {
   return (
     <div>
-      <button 
+      <button
         className="text-white bg-green-700 rounded-md"
         onClick={onClick}
         disabled={disabled}

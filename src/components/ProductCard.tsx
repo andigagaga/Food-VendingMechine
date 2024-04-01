@@ -1,10 +1,8 @@
-import { useState } from "react";
 import "../App.css";
 import { TFoods } from "../type";
-
+import Lottie from "lottie-react";
 import addButton from "../assets/add-icon.json";
 import minButton from "../assets/min-icon.json";
-import Lottie from "lottie-react";
 
 interface ProductCardProps {
   product: TFoods;
@@ -45,14 +43,14 @@ export default function ProductCard({
               className="stext-white rounded-full w-8"
               onClick={handleDecreaseQuantity}
             >
-              <Lottie animationData={minButton}/>
+              <Lottie animationData={minButton} />
             </button>
             <button
               className="bg-green-800 text-white rounded-full w-8"
               onClick={handlePurchase}
               disabled={disabled}
             >
-              <Lottie animationData={addButton}/>
+              <Lottie animationData={addButton} />
             </button>
           </>
         ) : (
